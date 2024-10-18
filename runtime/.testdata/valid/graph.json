@@ -1,0 +1,99 @@
+{
+  "nodes": {
+    "start": {
+      "id": "start",
+      "type": "setVariable",
+      "parameters": {
+        "name": "x",
+        "type": "number",
+        "readonly": false,
+        "value": 10
+      }
+    },
+    "5": {
+      "id": "5",
+      "type": "evaluate",
+      "parameters": {
+        "expression": {
+          "operator": "add",
+          "left": {
+            "type": "variable",
+            "data": {
+              "name": "x"
+            }
+          },
+          "right": {
+            "type": "constant",
+            "data": {
+              "type": "number",
+              "value": 5
+            }
+          }
+        }
+      }
+    },
+    "2": {
+      "id": "2",
+      "type": "if",
+      "parameters": {
+        "operator": "and",
+        "conditions": [
+          {
+            "operator": "gt",
+            "left": {
+              "type": "magicVariable",
+              "data": {
+                "source": "5"
+              }
+            },
+            "right": {
+              "type": "constant",
+              "data": {
+                "type": "number",
+                "value": 10
+              }
+            }
+          }
+        ]
+      }
+    },
+    "3": {
+      "id": "3",
+      "type": "log",
+      "parameters": {
+        "message": "x is greater than 5",
+        "target": "console"
+      }
+    },
+    "4": {
+      "id": "4",
+      "type": "log",
+      "parameters": {
+        "message": "x is not greater than 5",
+        "target": "console"
+      }
+    }
+  },
+  "edges": {
+    "start": [
+      {
+        "target": "5"
+      }
+    ],
+    "5": [
+      {
+        "target": "2"
+      }
+    ],
+    "2": [
+      {
+        "target": "3",
+        "condition": "true"
+      },
+      {
+        "target": "4",
+        "condition": "false"
+      }
+    ]
+  }
+}
