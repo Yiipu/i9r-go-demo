@@ -4,12 +4,19 @@ import (
 	"encoding/json"
 
 	"github.com/yiipu/i9r/runtime/graphengine"
-	"github.com/yiipu/i9r/runtime/varpool/basevarpool"
 )
 
 type Runtime struct {
-	Engine  graphengine.GraphEngine
-	VarPool basevarpool.IVarPool
+	Engine graphengine.GraphEngine
+}
+
+func (r *Runtime) Init() error {
+	err := r.Engine.VarPool.Init()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (r *Runtime) Execute(data []byte) error {
@@ -19,10 +26,8 @@ func (r *Runtime) Execute(data []byte) error {
 		return err
 	}
 
-	r.VarPool.Init()
-
+	r.Engine.VarPool.Clear()
 	r.Engine.Graph = &graph
-	r.Engine.VarPool = r.VarPool
 
 	err = r.Engine.Execute()
 	if err != nil {

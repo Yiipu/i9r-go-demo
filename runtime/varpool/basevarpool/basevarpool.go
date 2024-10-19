@@ -13,6 +13,7 @@ type MagicVar struct {
 
 type IVarPool interface {
 	Init() error
+	Clear()
 	SetVar(name string, v BaseVar) error
 	GetVar(name string) (BaseVar, error)
 	SetMagicVar(source string, v MagicVar) error

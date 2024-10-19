@@ -33,6 +33,13 @@ func (m *MemVarPool) Init() error {
 	return nil
 }
 
+func (m *MemVarPool) Clear() {
+	m.varpool.vars = make(map[string]basevarpool.BaseVar)
+	m.varpool.size = 0
+	m.magicvarpool.vars = make(map[string]basevarpool.BaseVar)
+	m.magicvarpool.size = 0
+}
+
 func (m *MemVarPool) setVar(p pool, n string, v basevarpool.BaseVar) error {
 	if p.size >= p.capacity {
 		return errors.New("pool is full")

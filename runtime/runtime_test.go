@@ -34,8 +34,11 @@ func TestRuntime_Execute(t *testing.T) {
 			}
 
 			r := &Runtime{
-				Engine:  graphengine.GraphEngine{},
-				VarPool: &memvarpool.MemVarPool{},
+				Engine: graphengine.GraphEngine{VarPool: &memvarpool.MemVarPool{}},
+			}
+			err = r.Init()
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Runtime.Init() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			err = r.Execute(data)
 			if (err != nil) != tt.wantErr {

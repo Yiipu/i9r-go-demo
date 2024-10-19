@@ -26,8 +26,13 @@ func main() {
 	}
 
 	r := &runtime.Runtime{
-		Engine:  graphengine.GraphEngine{},
-		VarPool: &memvarpool.MemVarPool{},
+		Engine: graphengine.GraphEngine{VarPool: &memvarpool.MemVarPool{}},
+	}
+
+	err = r.Init()
+	if err != nil {
+		fmt.Printf("Initialization failed: %v\n", err)
+		os.Exit(1)
 	}
 
 	err = r.Execute(data)
