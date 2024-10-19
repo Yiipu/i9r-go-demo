@@ -45,7 +45,7 @@ func (n *IfElse) Execute(vp *basevarpool.IVarPool) error {
 	(*vp).SetMagicVar(n.ID, basevarpool.MagicVar{
 		BaseVar: basevarpool.BaseVar{
 			Value:    result,
-			Readonly: true,
+			Readonly: false,
 		},
 	})
 

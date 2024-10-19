@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/yiipu/i9r/runtime/nodes/basenode"
+	"github.com/yiipu/i9r/runtime/nodes/expr"
 	"github.com/yiipu/i9r/runtime/varpool/basevarpool"
 )
 
@@ -13,13 +14,18 @@ type Output struct {
 }
 
 type OutputParams struct {
-	Message string `json:"message"`
-	Target  string `json:"target"`
+	Message expr.Value `json:"message"`
+	Target  string     `json:"target"`
 }
 
 func (n *Output) Execute(vp *basevarpool.IVarPool) error {
+	// only console for now
 	if n.Params.Target == "console" {
-		fmt.Println(n.Params.Message)
+		message, err := n.Params.Message.Get(vp)
+		if err != nil {
+			return err
+		}
+		fmt.Println(message)
 	}
 	return nil
 }

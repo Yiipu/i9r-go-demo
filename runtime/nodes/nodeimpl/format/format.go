@@ -49,7 +49,7 @@ func (n *Format) Execute(vp *basevarpool.IVarPool) error {
 	err = (*vp).SetMagicVar(n.ID, basevarpool.MagicVar{
 		BaseVar: basevarpool.BaseVar{
 			Value:    output,
-			Readonly: true,
+			Readonly: false,
 		},
 	})
 	if err != nil {

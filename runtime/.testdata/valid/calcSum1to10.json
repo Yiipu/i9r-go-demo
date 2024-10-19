@@ -1,0 +1,208 @@
+{
+    "nodes": {
+        "start": {
+            "id": "start",
+            "type": "setVariable",
+            "parameters": {
+                "name": "count",
+                "type": "number",
+                "readonly": false,
+                "value": {
+                    "type": "constant",
+                    "data": {
+                        "type": "number",
+                        "value": 0
+                    }
+                }
+            }
+        },
+        "setindex": {
+            "id": "setindex",
+            "type": "setVariable",
+            "parameters": {
+                "name": "i",
+                "type": "number",
+                "readonly": false,
+                "value": {
+                    "type": "constant",
+                    "data": {
+                        "type": "number",
+                        "value": 1
+                    }
+                }
+            }
+        },
+        "loop": {
+            "id": "loop",
+            "type": "if",
+            "parameters": {
+                "operator": "and",
+                "conditions": [
+                    {
+                        "operator": "lt",
+                        "left": {
+                            "type": "variable",
+                            "data": {
+                                "name": "i"
+                            }
+                        },
+                        "right": {
+                            "type": "constant",
+                            "data": {
+                                "type": "number",
+                                "value": 11
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "addcount": {
+            "id": "addcount",
+            "type": "evaluate",
+            "parameters": {
+                "expression": {
+                    "operator": "add",
+                    "left": {
+                        "type": "variable",
+                        "data": {
+                            "name": "count"
+                        }
+                    },
+                    "right": {
+                        "type": "variable",
+                        "data": {
+                            "name": "i"
+                        }
+                    }
+                }
+            }
+        },
+        "updatecont": {
+            "id": "updatecont",
+            "type": "setVariable",
+            "parameters": {
+                "name": "count",
+                "type": "number",
+                "readonly": false,
+                "value": {
+                    "type": "magicVariable",
+                    "data": {
+                        "source": "addcount"
+                    }
+                }
+            }
+        },
+        "addindex": {
+            "id": "addindex",
+            "type": "evaluate",
+            "parameters": {
+                "expression": {
+                    "operator": "add",
+                    "left": {
+                        "type": "variable",
+                        "data": {
+                            "name": "i"
+                        }
+                    },
+                    "right": {
+                        "type": "constant",
+                        "data": {
+                            "type": "number",
+                            "value": 1
+                        }
+                    }
+                }
+            }
+        },
+        "updateindex": {
+            "id": "updateindex",
+            "type": "setVariable",
+            "parameters": {
+                "name": "i",
+                "type": "number",
+                "readonly": false,
+                "value": {
+                    "type": "magicVariable",
+                    "data": {
+                        "source": "addindex"
+                    }
+                }
+            }
+        },
+        "falsebranch": {
+            "id": "falsebranch",
+            "type": "format",
+            "parameters": {
+                "formatString": "sum from 1 to 10 is {{v:count}}"
+            }
+        },
+        "output": {
+            "id": "output",
+            "type": "log",
+            "parameters": {
+                "message": {
+                    "type": "magicVariable",
+                    "data": {
+                        "source": "falsebranch"
+                    }
+                },
+                "target": "console"
+            }
+        }
+    },
+    "edges": {
+        "start": [
+            {
+                "target": "setindex",
+                "condition": ""
+            }
+        ],
+        "setindex": [
+            {
+                "target": "loop",
+                "condition": ""
+            }
+        ],
+        "loop": [
+            {
+                "target": "addcount",
+                "condition": "true"
+            },
+            {
+                "target": "falsebranch",
+                "condition": "false"
+            }
+        ],
+        "addcount": [
+            {
+                "target": "updatecont",
+                "condition": ""
+            }
+        ],
+        "updatecont": [
+            {
+                "target": "addindex",
+                "condition": ""
+            }
+        ],
+        "addindex": [
+            {
+                "target": "updateindex",
+                "condition": ""
+            }
+        ],
+        "updateindex": [
+            {
+                "target": "loop",
+                "condition": ""
+            }
+        ],
+        "falsebranch": [
+            {
+                "target": "output",
+                "condition": ""
+            }
+        ]
+    }
+}

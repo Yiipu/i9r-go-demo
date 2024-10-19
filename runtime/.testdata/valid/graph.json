@@ -7,7 +7,13 @@
         "name": "x",
         "type": "number",
         "readonly": false,
-        "value": 10
+        "value": {
+          "type": "constant",
+          "data": {
+            "type": "number",
+            "value": 10
+          }
+        }
       }
     },
     "5": {
@@ -61,7 +67,13 @@
       "id": "3",
       "type": "log",
       "parameters": {
-        "message": "x is greater than 5",
+        "message": {
+          "type": "constant",
+          "data": {
+            "type": "string",
+            "value": "x is greater than 5"
+          }
+        },
         "target": "console"
       }
     },
@@ -69,7 +81,13 @@
       "id": "4",
       "type": "log",
       "parameters": {
-        "message": "x is not greater than 5",
+        "message": {
+          "type": "constant",
+          "data": {
+            "type": "string",
+            "value": "x is not greater than 5"
+          }
+        },
         "target": "console"
       }
     }

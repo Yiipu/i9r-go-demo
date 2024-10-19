@@ -1,0 +1,103 @@
+{
+    "nodes": {
+        "start": {
+            "id": "start",
+            "type": "setVariable",
+            "parameters": {
+                "name": "x",
+                "type": "number",
+                "readonly": false,
+                "value": {
+                    "type": "constant",
+                    "data": {
+                        "type": "number",
+                        "value": 1
+                    }
+                }
+            }
+        },
+        "increment": {
+            "id": "increment",
+            "type": "evaluate",
+            "parameters": {
+                "expression": {
+                    "operator": "add",
+                    "left": {
+                        "type": "variable",
+                        "data": {
+                            "name": "x"
+                        }
+                    },
+                    "right": {
+                        "type": "constant",
+                        "data": {
+                            "type": "number",
+                            "value": 1
+                        }
+                    }
+                }
+            }
+        },
+        "updateX": {
+            "id": "updateX",
+            "type": "setVariable",
+            "parameters": {
+                "name": "x",
+                "type": "number",
+                "readonly": false,
+                "value": {
+                    "type": "magicVariable",
+                    "data": {
+                        "source": "increment"
+                    }
+                }
+            }
+        },
+        "formatMessage": {
+            "id": "formatMessage",
+            "type": "format",
+            "parameters": {
+                "formatString": "1+1={{v:x}}"
+            }
+        },
+        "output": {
+            "id": "output",
+            "type": "log",
+            "parameters": {
+                "message": {
+                    "type": "magicVariable",
+                    "data": {
+                        "source": "formatMessage"
+                    }
+                },
+                "target": "console"
+            }
+        }
+    },
+    "edges": {
+        "start": [
+            {
+                "target": "increment",
+                "condition": ""
+            }
+        ],
+        "increment": [
+            {
+                "target": "updateX",
+                "condition": ""
+            }
+        ],
+        "updateX": [
+            {
+                "target": "formatMessage",
+                "condition": ""
+            }
+        ],
+        "formatMessage": [
+            {
+                "target": "output",
+                "condition": ""
+            }
+        ]
+    }
+}

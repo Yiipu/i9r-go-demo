@@ -24,6 +24,16 @@ func TestRuntime_Execute(t *testing.T) {
 			filePath: "./.testdata/valid/simple.json",
 			wantErr:  false,
 		},
+		{
+			name:     "increment",
+			filePath: "./.testdata/valid/increment.json",
+			wantErr:  false,
+		},
+		{
+			name:     "calc sum 1 to 10",
+			filePath: "./.testdata/valid/calcSum1to10.json",
+			wantErr:  false,
+		},
 	}
 
 	for _, tt := range tests {

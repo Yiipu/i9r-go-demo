@@ -7,14 +7,26 @@
           "name": "x",
           "type": "number",
           "readonly": false,
-          "value": 10
+          "value": {
+            "type": "constant",
+            "data": {
+              "type": "number",
+              "value": 10
+            }
+          }
         }
       },
       "end": {
         "id": "end",
         "type": "log",
         "parameters": {
-          "message": "Execution finished",
+          "message":  {
+            "type": "constant",
+            "data": {
+              "type": "string",
+              "value": "Hello, world!"
+            }
+          },
           "target": "console"
         }
       }
