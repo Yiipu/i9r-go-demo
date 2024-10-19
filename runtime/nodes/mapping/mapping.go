@@ -5,6 +5,7 @@ import (
 
 	"github.com/yiipu/i9r/runtime/nodes/basenode"
 	"github.com/yiipu/i9r/runtime/nodes/nodeimpl/evaluate"
+	"github.com/yiipu/i9r/runtime/nodes/nodeimpl/format"
 	"github.com/yiipu/i9r/runtime/nodes/nodeimpl/ifelse"
 	"github.com/yiipu/i9r/runtime/nodes/nodeimpl/output"
 	"github.com/yiipu/i9r/runtime/nodes/nodeimpl/setvar"
@@ -15,6 +16,7 @@ const (
 	EVALUATE basenode.NodeType = "evaluate"
 	SETVAR   basenode.NodeType = "setVariable"
 	LOG      basenode.NodeType = "log"
+	FORMAT   basenode.NodeType = "format"
 )
 
 var Mapping = map[basenode.NodeType]func(basenode.BaseNode) basenode.NodeInterface{
@@ -35,6 +37,11 @@ var Mapping = map[basenode.NodeType]func(basenode.BaseNode) basenode.NodeInterfa
 	},
 	LOG: func(b basenode.BaseNode) basenode.NodeInterface {
 		n := &output.Output{BaseNode: b}
+		mapstructure.Decode(b.Params, &n.Params)
+		return n
+	},
+	FORMAT: func(b basenode.BaseNode) basenode.NodeInterface {
+		n := &format.Format{BaseNode: b}
 		mapstructure.Decode(b.Params, &n.Params)
 		return n
 	},
