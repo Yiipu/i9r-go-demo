@@ -42,12 +42,16 @@ func (n *IfElse) Execute(vp *basevarpool.IVarPool) error {
 		return err
 	}
 
-	(*vp).SetMagicVar(n.ID, basevarpool.MagicVar{
+	err = (*vp).SetMagicVar(n.ID, basevarpool.MagicVar{
 		BaseVar: basevarpool.BaseVar{
 			Value:    result,
 			Readonly: false,
 		},
 	})
+
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
