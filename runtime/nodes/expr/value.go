@@ -22,23 +22,23 @@ const (
 )
 
 type Value struct {
-	Type StorageType            `json:"type"`
-	Data map[string]interface{} `json:"data"`
+	DataStorageType StorageType            `mapstructure:"type"`
+	Data            map[string]interface{} `mapstructure:"data"`
 }
 
 type VariableData struct {
-	Name string `json:"name"`
+	Name string `mapstructure:"name"`
 }
 type MagicVariableData struct {
-	Source string `json:"source"`
+	Source string `mapstructure:"source"`
 }
 type ConstantData struct {
-	Type  ValueType   `json:"type"`
-	Value interface{} `json:"value"`
+	Type  ValueType   `mapstructure:"type"`
+	Value interface{} `mapstructure:"value"`
 }
 
 func (v *Value) Get(vp *basevarpool.IVarPool) (interface{}, error) {
-	switch v.Type {
+	switch v.DataStorageType {
 	case MagicVariable:
 		data := MagicVariableData{}
 		err := mapstructure.Decode(v.Data, &data)
