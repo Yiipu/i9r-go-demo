@@ -10,12 +10,12 @@ import (
 
 type Output struct {
 	basenode.BaseNode
-	Params OutputParams `json:"params"`
+	Params OutputParams `mapstructure:"params"`
 }
 
 type OutputParams struct {
-	Message expr.Value `json:"message"`
-	Target  string     `json:"target"`
+	Message expr.Value `mapstructure:"message"`
+	Target  string     `mapstructure:"target"`
 }
 
 func (n *Output) Execute(vp *basevarpool.IVarPool) error {

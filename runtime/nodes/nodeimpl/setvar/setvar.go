@@ -8,14 +8,14 @@ import (
 
 type SetVar struct {
 	basenode.BaseNode
-	Params SetVarParams `json:"params"`
+	Params SetVarParams `mapstructure:"params"`
 }
 
 type SetVarParams struct {
-	Name     string     `json:"name"`
-	Type     string     `json:"type"`
-	Readonly bool       `json:"readonly"`
-	Value    expr.Value `json:"value"`
+	Name     string     `mapstructure:"name"`
+	Type     string     `mapstructure:"type"`
+	Readonly bool       `mapstructure:"readonly"`
+	Value    expr.Value `mapstructure:"value"`
 }
 
 func (n *SetVar) Execute(vp *basevarpool.IVarPool) error {

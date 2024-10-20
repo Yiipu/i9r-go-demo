@@ -11,11 +11,11 @@ import (
 
 type Format struct {
 	basenode.BaseNode
-	Params FormatParams `json:"params"`
+	Params FormatParams `mapstructure:"params"`
 }
 
 type FormatParams struct {
-	FormatString string `json:"formatString"`
+	FormatString string `mapstructure:"formatString"`
 }
 
 func (n *Format) Execute(vp *basevarpool.IVarPool) error {

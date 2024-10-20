@@ -23,9 +23,9 @@ const (
 )
 
 type BoolExpr struct {
-	Operator boolOpType `json:"operator"`
-	Left     Value      `json:"left"`
-	Right    Value      `json:"right"`
+	Operator boolOpType `mapstructure:"operator"`
+	Left     Value      `mapstructure:"left"`
+	Right    Value      `mapstructure:"right"`
 }
 
 func (b *BoolExpr) Evaluate(vp *basevarpool.IVarPool) (bool, error) {

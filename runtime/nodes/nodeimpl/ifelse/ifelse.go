@@ -10,7 +10,7 @@ import (
 
 type IfElse struct {
 	basenode.BaseNode
-	Params IfElseParams `json:"params"`
+	Params IfElseParams `mapstructure:"params"`
 }
 
 type LogicOperator string
@@ -21,8 +21,8 @@ const (
 )
 
 type IfElseParams struct {
-	Operator   LogicOperator   `json:"operator"`
-	Conditions []expr.BoolExpr `json:"conditions"`
+	Operator   LogicOperator   `mapstructure:"operator"`
+	Conditions []expr.BoolExpr `mapstructure:"conditions"`
 }
 
 func (n *IfElse) Execute(vp *basevarpool.IVarPool) error {

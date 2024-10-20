@@ -8,11 +8,11 @@ import (
 
 type Evaluate struct {
 	basenode.BaseNode
-	Params EvaluateParams `json:"params"`
+	Params EvaluateParams `mapstructure:"params"`
 }
 
 type EvaluateParams struct {
-	Expression expr.AlgoExpr `json:"expression"`
+	Expression expr.AlgoExpr `mapstructure:"expression"`
 }
 
 func (n *Evaluate) Execute(vp *basevarpool.IVarPool) error {
