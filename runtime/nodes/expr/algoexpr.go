@@ -14,9 +14,9 @@ const (
 )
 
 type AlgoExpr struct {
-	Operator algoOpType `json:"operator"`
-	Left     Value      `json:"left"`
-	Right    Value      `json:"right"`
+	Operator algoOpType `mapstructure:"operator"`
+	Left     Value      `mapstructure:"left"`
+	Right    Value      `mapstructure:"right"`
 }
 
 func (a *AlgoExpr) Evaluate(vp *basevarpool.IVarPool) (interface{}, error) {
